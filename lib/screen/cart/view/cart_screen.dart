@@ -47,7 +47,7 @@ class _CartScreenState extends State<CartScreen> {
                         child: const Text("No!")),
                     ElevatedButton(
                         onPressed: () {
-                          DbHelper.helper.deleteData(
+                          DbHelper.helper.deleteCartData(
                               controller.cartList[index].id!);
                           controller.getCart();
                           Get.back();
