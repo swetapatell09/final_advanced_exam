@@ -28,54 +28,56 @@ class _CartScreenState extends State<CartScreen> {
         centerTitle: true,
         backgroundColor: Colors.blueGrey,
       ),
-      body:  ListView.builder(
-        itemBuilder: (context, index) {
-      return Obx(()=> ListTile(
-          onLongPress: () {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  title: const Text("Are You Sure?"),
-                  content: Text(
-                      "${controller.cartList[index]} will be deleted!"),
-                  actions: [
-                    ElevatedButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        child: const Text("No!")),
-                    ElevatedButton(
-                        onPressed: () {
-                          DbHelper.helper.deleteCartData(
-                              controller.cartList[index].id!);
-                          controller.getCart();
-                          Get.back();
-                        },
-                        child: const Text("Yes!"))
-                  ],
-                );
-              },
-            );
-          },
-          title: Text(
-            controller.cartList[index].name!,
-            style: const TextStyle(fontSize: 20),
-          ),
-          subtitle: Text(
-            controller.cartList[index].qua!,
-            style: const TextStyle(fontSize: 20),
-          ),
-          trailing: Text(
-            controller.cartList[index].price!,
-            style: const TextStyle(
-                fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-        ),
-      );
-    },
-    itemCount: controller.cartList.length,
-    ),
+      body:  Obx(() =>ListView.builder(
+          itemCount: controller.cartList.length,
+          itemBuilder: (context, index) {
+        return  ListTile(
+            onLongPress: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text("Are You Sure?"),
+                    content: Text(
+                        "${controller.cartList[index]} will be deleted!"),
+                    actions: [
+                      ElevatedButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          child: const Text("No!")),
+                      ElevatedButton(
+                          onPressed: () {
+                            DbHelper.helper.deleteCartData(
+                                controller.cartList[index].id!);
+                            controller.getCart();
+                            Get.back();
+                          },
+                          child: const Text("Yes!"))
+                    ],
+                  );
+                },
+              );
+            },
+            title: Text(
+              controller.cartList[index].name!,
+              style: const TextStyle(fontSize: 20),
+            ),
+            subtitle: Text(
+              controller.cartList[index].qua!,
+              style: const TextStyle(fontSize: 20),
+            ),
+            trailing: Text(
+              controller.cartList[index].price!,
+              style: const TextStyle(
+                  fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          );
+
+            },
+
+            ),
+      ),
     );
   }
 }
