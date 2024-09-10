@@ -19,8 +19,8 @@ class HomeController extends GetxController {
   {
     cartList.value=await DbHelper.helper.readCartData();
   }
-  void getFirebaseData()async
+  void getFirebaseData()
   {
-    list.value=await CloudFirestoreHelper.fireDBHelper.readData();
+    list.value= CloudFirestoreHelper.fireDBHelper.readData() as List<FireStoreModel>;
   }
 }

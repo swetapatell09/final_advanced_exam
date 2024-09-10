@@ -15,16 +15,12 @@ class CloudFirestoreHelper {
         .add({"name": model.name, "price": model.price, "qua": model.qua});
   }
 
-  Future<List<FireStoreModel>> readData() async {
-    QuerySnapshot qds = await db.collection("shopping").get();
-    List<QueryDocumentSnapshot<Object?>> qd = qds.docs;
-    List<FireStoreModel> model = qd
-        .map(
-          (e) => FireStoreModel.mapToModel(e.data()! as Map, e.id),
-        )
-        .toList();
-    return model;
+  Stream<QuerySnapshot<Map<String, dynamic>>> readData() {
+    return FirebaseFirestore.instance.collection("shopping").snapshots();
   }
+
+
+
 
   Future<void> updateData(FireStoreModel model) async {
     await db
